@@ -1,0 +1,32 @@
+*{
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+   font-family: "Poppins", serif;
+}
+@import "tailwindcss";
+:root {
+    /* Primary Colors */
+    --color-red: #e63946; /* Vibrant Red */
+    --color-black: #1d1d1d; /* Dark Black */
+    --color-white: #f8f9fa; /* Soft White */
+  
+    /* Accent Colors */
+    --color-gray: #6c757d; /* Neutral Gray for Text or Borders */
+    --color-dark-gray: #343a40; /* Dark Gray for Depth */
+    --color-light-gray: #e9ecef; /* Light Gray for Backgrounds */
+  
+    /* Supporting Shades of Red */
+    --color-light-red: #ff6b6b; /* Lighter Red for Highlights */
+    --color-dark-red: #c71f37; /* Deeper Red for Buttons or Text */
+  
+    /* Additional Colors */
+    --color-gold: #ffc107; /* Gold Accent for Highlights */
+    --color-teal: #20c997; /* Teal for Subtle Highlights */
+  
+    /* Typography Colors */
+    --color-text-primary: #212529; /* Primary Text Color */
+    --color-text-secondary: #495057; /* Secondary Text Color */
+    --color-text-muted: #adb5bd; /* Muted Text */
+  }
+  
