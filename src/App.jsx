@@ -1,25 +1,28 @@
-import React from 'react'
-import Navbar from './components/navbar/Navbar'
-import { Route, Routes } from 'react-router-dom'
-import RoutesJson from './routes/RoutesJson'
-import Footer from './components/footer/Footer'
+import React from "react";
+import { Route, Routes, useLocation, useParams } from "react-router-dom";
+import Navbar from "./components/navbar/Navbar";
+import Footer from "./components/footer/Footer";
+import RoutesJson from "./routes/RoutesJson";
 
 const App = () => {
+  const location = useLocation();
+
+  const hideNavbarFooter = location.pathname === "/auth/login" || location.pathname === "/auth/signup";
+
   return (
     <div>
-      <Navbar/>
+      {!hideNavbarFooter ? <Navbar /> : null} 
+      
       <Routes>
-        {
-          RoutesJson.map(({path,element} , index)=>{
-            return (
-                <Route key={index} path={path} element={element}/>
-            )
-          })
-        }
+        {RoutesJson.map(({ path, element }, index) => (
+           <Route key={index} path={path} element={element} />
+        ))}
       </Routes>
-      <Footer/>
-    </div>
-  )
-}
 
-export default App
+      {!hideNavbarFooter ? <Footer /> :null}
+    </div>
+  );
+};
+
+export default App;
+

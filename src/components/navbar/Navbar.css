@@ -1,0 +1,33 @@
+.logo-div{
+   width: 150px;
+   height: 40px;
+   background-color: var(--color-white);
+   border: none;
+   border-radius: 5px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+.appBar{
+  background-color: var(--color-red) !important;
+}
+.login-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20%;
+    height: auto;
+}
+
+
+@media (max-width: 600px) {
+    .logo-div{
+        width: 100px;
+        height: 30px;
+    }
+    .login{
+        width: 20px;
+        height: 20px;
+        font-size: 0.5rem !important;
+    }
+}
