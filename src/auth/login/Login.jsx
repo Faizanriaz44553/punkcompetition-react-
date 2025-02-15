@@ -19,18 +19,25 @@ const Login = () => {
         handleSubmit,
         formState: { errors }
     } = useForm();
-    const onSubmit = async(data)=>{
-        try {
-            const {email , password} = data;
-            const loginCredential = await signInWithEmailAndPassword(auth, email, password)
-            if(loginCredential.user) {
-                navigate('/')
-            }
-        } catch (error) {
-            console.error(error)
-        }
-        console.log(data);
-    }
+    
+    const onSubmit = async (data) => {
+        console.log(data.email , data.password);
+        
+       await signInWithEmailAndPassword(auth, data.email, data.password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          console.log(user);
+          if (user) {
+            navigate('/')
+          }
+          
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+        });
+    };
+    
 
     return (
         <Container component="main" maxWidth="xs" className="flex items-center justify-center h-screen">

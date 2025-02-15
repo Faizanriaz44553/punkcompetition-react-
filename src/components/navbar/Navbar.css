@@ -9,7 +9,7 @@
    align-items: center;
 }
 .appBar{
-  background-color: var(--color-red) !important;
+  background-color: var(--color-black) !important;
 }
 .login-div {
     display: flex;

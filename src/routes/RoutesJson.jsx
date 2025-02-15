@@ -6,6 +6,7 @@ import DetailPage from "../pages/detailPage/DetailPage";
 import Home from "../pages/home/Home";
 import LiveWithdrew from "../pages/liveWithdarew/LiveWithdrew";
 import PrivacyPolicy from "../pages/privacyAndPolicy/PrivacyPolicy";
+import Profile from "../pages/profile/Profile";
 import Winners from "../pages/winners/Winners";
 
 const RoutesJson = [
@@ -36,6 +37,10 @@ const RoutesJson = [
     {
         path : '/Privacy&Policy',
         element :<PrivacyPolicy/>
+    },
+    {
+        path : '/profile',
+        element :<Profile/>
     },
     {
         path : '/auth/signup',

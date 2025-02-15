@@ -9,41 +9,68 @@ import {
 } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../Firebase.config";
+import { useDispatch } from "react-redux";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth, storage, db } from "../../Firebase.config";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { doc, setDoc } from "firebase/firestore";
 import { setUser } from "../../store/features/user/User";
-import UserTrue from "../../utils/UserTrue";
 import useUserTrue from "../../utils/UserTrue";
 
 const Signup = () => {
     const navigate = useNavigate();
-    // const count = useSelector((state) => state.counter);
     const dispatch = useDispatch();
+    const [file, setFile] = useState(null); // File state handle
+    const user = useUserTrue();
+    console.log(user);
+    
+
     const {
         register,
         handleSubmit,
         formState: { errors }
     } = useForm();
+
     const onSubmit = async (data) => {
         try {
-            const { email, password } = data;
-            const userCrendential = await createUserWithEmailAndPassword(auth, email, password);
-            dispatch(setUser(userCrendential.user))
-            console.log(userCrendential.user);
-            navigate('/auth/login')
-        } catch (error) {
-            console.log(error);
-        }
-    }
-    const user = useUserTrue();
+            const { Fname, Uname, Number, email, password } = data;
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
 
-    // Function to handle redirection if user is authenticated
-    useEffect(() => {
-      if (user) {
-        navigate('/'); // If user exists, redirect to home page
-      }
-    }, [user, navigate]);
+            let profileURL = "";
+
+            if (file) {
+                const storageRef = ref(storage, `profilePictures/${user.uid}`);
+                await uploadBytes(storageRef, file);
+                profileURL = await getDownloadURL(storageRef);
+            }
+
+            await updateProfile(user, { displayName: Fname, photoURL: profileURL });
+
+            // Save user data to Firestore
+            await setDoc(doc(db, "users", user.uid), {
+                fullName: Fname,
+                username: Uname,
+                phoneNumber: Number,
+                email,
+                profileURL,
+                walletBalance: 0,
+                ticketsPurchased: []
+            });
+
+            dispatch(setUser({ email: user.email, displayName: Fname, profileURL }));
+
+            alert("Signup Successful!");
+            navigate('/auth/login');
+        } catch (error) {
+            console.error("Error signing up:", error);
+        }
+    };
+     useEffect(()=>{
+        if (user) {
+            navigate('/');
+        }
+     },[user])
     return (
         <Container component="main" maxWidth="xs" className="flex items-center justify-center h-screen">
             <Paper elevation={3} style={{ padding: "20px", marginTop: "50px" }}>
@@ -51,56 +78,23 @@ const Signup = () => {
                     Signup
                 </Typography>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <Box >
-                        <TextField
-                            label="Full Name"
-                            fullWidth
-                            margin="normal"
-                            variant="outlined"
-                            {...register("Fname", { required: true })}
-                        />
-                        <TextField
-                            label="User Nmae"
-                            fullWidth
-                            margin="normal"
-                            variant="outlined"
-                            {...register("Uname", { required: true })}
-                        />
-                        <TextField
-                            label="Number"
-                            type="number"
-                            fullWidth
-                            margin="normal"
-                            variant="outlined"
-                            {...register("Number", { required: true })}
-                        />
-                        <TextField
-                            label="Email"
-                            fullWidth
-                            margin="normal"
-                            variant="outlined"
-                            {...register("email", { required: true })}
-                        />
+                    <Box>
+                        <TextField label="Full Name" fullWidth margin="normal" variant="outlined" {...register("Fname", { required: true })} />
+                        <TextField label="Username" fullWidth margin="normal" variant="outlined" {...register("Uname", { required: true })} />
+                        <TextField label="Number" type="number" fullWidth margin="normal" variant="outlined" {...register("Number", { required: true })} />
+                        <TextField label="Email" fullWidth margin="normal" variant="outlined" {...register("email", { required: true })} />
                         {errors.email && <span>This field is required</span>}
-                        <TextField
-                            label="Password"
-                            type="password"
-                            fullWidth
-                            margin="normal"
-                            variant="outlined"
-                            {...register("password", { required: true })}
-                        />
-                        {errors.password && <span>This field is required</span>}
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            color="primary"
-                            style={{ marginTop: "20px" }}
-                        >
+                        <TextField label="Password" type="password" fullWidth margin="normal" variant="outlined" {...register("password", { required: true })} />
+                        
+                        {/* Profile Picture Input */}
+                        <input type="file" accept="image/*" onChange={(e) => setFile(e.target.files[0])} required />
+
+                        <Button type="submit" fullWidth variant="contained" color="primary" style={{ marginTop: "20px" }}>
                             Signup
                         </Button>
-                        <h1>do you have an account? <p onClick={() => navigate('/auth/signup')}>Signup</p></h1>
+                        <Typography>
+                            Already have an account? <span style={{ color: "blue", cursor: "pointer" }} onClick={() => navigate('/auth/login')}>Login</span>
+                        </Typography>
                     </Box>
                 </form>
             </Paper>

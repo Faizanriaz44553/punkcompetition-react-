@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   AppBar,
   Toolbar,
@@ -18,6 +18,10 @@ import UserTrue from "../../utils/UserTrue";
 import './Navbar.css';
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useNavigate } from "react-router-dom";
+import { deleteUser, signOut } from "firebase/auth";
+import { useDispatch, useSelector } from "react-redux";
+import { auth } from "../../Firebase.config";
+import { setUser } from "../../store/features/user/User";
 
 
 const Navbar = () => {
@@ -26,10 +30,10 @@ const Navbar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const usertrue = UserTrue();
   const navigate = useNavigate();
-
-  // Open/Close Avatar Menu
+  // const user = useSelector((state) => state.user.user);
   const handleMenuOpen = (event) => setAnchorEl(event.currentTarget);
   const handleMenuClose = () => setAnchorEl(null);
+  const dispatch = useDispatch()
 
   const toggleDrawer = (open) => (event) => {
     if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
@@ -37,12 +41,24 @@ const Navbar = () => {
     }
     setDrawerOpen(open);
   };
-
-
+   const Logout =async ()=>{
+    try {
+      await signOut(auth);
+      console.log("User logged out successfully!");
+      dispatch(setUser(null));
+      navigate("/auth/login")
+    } catch (error) {
+      console.error("Logout Error:", error.message);
+    }
+   }
+   const profileNavigate =()=>{
+    handleMenuClose
+    navigate("/profile")
+   }
   return (
     <>
       {/* Navbar */}
-      <AppBar position="static" className="appBar">
+      <AppBar position="fixed" className="appBar">
         <Toolbar>
           {/* Logo */}
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
@@ -86,19 +102,19 @@ const Navbar = () => {
               </IconButton>
             </Toolbar>
               <IconButton onClick={handleMenuOpen}>
-                <Avatar src="" />
+                <Avatar src={usertrue?.photoURL} />
               </IconButton>
               <Menu
                 anchorEl={anchorEl}
                 open={Boolean(anchorEl)}
                 onClose={handleMenuClose}
               >
-                <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+                <MenuItem onClick={profileNavigate}>Profile</MenuItem>
                 <MenuItem onClick={handleMenuClose}>Dashboard</MenuItem>
                 <MenuItem
                   onClick={() => {
-                    setUser(null);
                     handleMenuClose();
+                    Logout()
                   }}
                 >
                   Logout
@@ -146,36 +162,39 @@ const Navbar = () => {
         </IconButton>
         <List>
           <ListItem button>
-            <ListItemText primary="Home" />
+            <ListItemText primary="Home" onClick={()=>{navigate('/')}}/>
           </ListItem>
           <ListItem button>
-            <ListItemText primary="About" />
+            <ListItemText primary="Winners" onClick={()=>{navigate('/Winners')}}/>
           </ListItem>
           <ListItem button>
-            <ListItemText primary="Services" />
+            <ListItemText primary="LiveWithdrew" onClick={()=>{navigate('/LiveWithdrew')}}/>
           </ListItem>
           <ListItem button>
-            <ListItemText primary="Contact" />
+            <ListItemText primary="About" onClick={()=>{navigate('/about')}}/>
+          </ListItem>
+          <ListItem button>
+            <ListItemText primary="Contact" onClick={()=>{navigate('/Contact')}}/>
+          </ListItem>
+          <ListItem button>
+            <ListItemText primary="Privacy&Policy" onClick={()=>{navigate('/Privacy&Policy')}}/>
           </ListItem>
         </List>
 
         {/* Mobile Authentication Buttons */}
         {!usertrue ? (
           <>
-            <Button variant="contained" color="primary" fullWidth sx={{ my: 1 }}>
+            <Button variant="contained" color="primary" fullWidth sx={{ my: 1 }}  onClick={()=>navigate('/auth/login')}>
               Login
             </Button>
-            <Button variant="outlined" color="inherit" fullWidth sx={{ my: 1 }}>
+            <Button variant="outlined" color="inherit" fullWidth sx={{ my: 1 }} onClick={()=>navigate('/auth/signup')}>
               Signup
             </Button>
           </>
         ) : (
           <>
             <ListItem button>
-              <ListItemText primary="Profile" />
-            </ListItem>
-            <ListItem button>
-              <ListItemText primary="Dashboard" />
+              <ListItemText primary="Profile" onClick={profileNavigate}/>
             </ListItem>
             <ListItem
               button
@@ -184,7 +203,7 @@ const Navbar = () => {
                 setOpen(false);
               }}
             >
-              <ListItemText primary="Logout" />
+              <ListItemText primary="Logout" onClick={() => {Logout()}} />
             </ListItem>
           </>
         )}

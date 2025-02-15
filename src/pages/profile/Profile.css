@@ -1,0 +1,178 @@
+.main-div {
+    width: 100%;
+    height: 100vh;
+    position: relative;  /* Ensure child absolute elements respect this */
+}
+.profile-loader-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 250px;
+}
+.topBackground {
+    background: linear-gradient(135deg, var(--color-dark-red), var(--color-red), var(--color-dark-gray), var(--color-black));
+    width: 100%;
+    height: 250px; 
+    position: relative; /* Remove absolute */
+    border-bottom-right-radius: 50%;
+    border-bottom-left-radius: 50%;
+    z-index: 0; /* Negative z-index hata do */
+}
+
+.profileMainDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    width: 100%;
+    padding: 20px;
+}
+.prfileData{
+    text-align: center;
+    color: var(--color-white);
+    margin-bottom: 5px;
+}
+.profilePic {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;  /* Slightly bigger for better appearance */
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid var(--color-gold);
+    overflow: hidden;  /* Ensure image does not overflow */
+}
+
+.profile-image {
+    width: 100%;   /* Full width of the parent */
+    height: 100%;  /* Full height of the parent */
+    object-fit: cover;  /* Ensures proper aspect ratio */
+    border-radius: 50%;
+}
+
+/* profile hostory section started*/
+.profile-detail-main-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+.profile-detail-second-div{
+   width: 100%;
+}
+.profile-amount-main-div {
+    min-height: 200px;  /* Pehle se set height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, var(--color-black), var(--color-dark-gray), var(--color-red), var(--color-dark-red));
+    border-radius: 10px;
+    /* border: 1px solid var(--color-black); */
+}
+
+.profile-amount-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+.profile-amount-detail-div{
+    width: 50%;
+    padding: 10px;
+}
+.profile-user-amount{
+    color: var(--color-gold);
+    font-size: 6rem;
+    font-weight: bold;
+}
+.profile-wallet-balance-heading{
+    color: var(--color-white);
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.doller-sign{
+    color: var(--color-gold);
+    font-size: 1rem;
+    font-weight: bold;
+}
+.profile-card-main-div{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   width: 100%;
+   gap: 10px;
+}
+.profile-card-image-div-1{
+   width: 40%;
+   height: 60px;
+   background-color: var(--color-white);
+   border-radius: 10px;
+   border: none;
+}
+.profile-card-image-div-2{
+  width: 40%;
+  height: 60px;
+  background-color: var(--color-white);
+  border-radius: 10px;
+  border: none;
+}
+.profile-visaCard-image{
+    width: 100%;
+    height: 60px;
+    object-fit: contain;
+}
+.profile-masterCard-image{
+    width: 100%;
+    height: 60px;
+   object-fit: contain;
+}
+.profile-addAmount-main-div{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+.profile-addAmount-button{
+    width: 80%;
+    font-size: 1rem;
+    background-color: var(--color-gold);
+    color: var(--color-white);
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px 5px 10px;
+    cursor: pointer;
+}
+.profile-reload-amount-icon{
+    color: var(--color-white);
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .profile-amount-main-div{
+        height: 100px;
+    }
+    .profile-user-amount{
+       font-size: 2.5rem;
+    }
+    .profile-wallet-balance-heading{
+        font-size: 1rem;
+        margin-bottom: -5px;
+    }
+    .profile-card-image-div-1{
+      height: 30px;
+    }
+    .profile-card-image-div-2{
+      height: 30px;
+    }
+    .profile-visaCard-image{
+      height:30px;
+    }
+    .profile-masterCard-image{
+        height: 30px;
+    }
+    .profile-addAmount-button{
+      width: 100%;
+    }
+}
