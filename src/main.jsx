@@ -9,9 +9,7 @@ import { store } from './store/Store.js'
 createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <BrowserRouter>
-      <StrictMode>
-        <App />
-      </StrictMode>,
+     <App/>
     </BrowserRouter>
   </Provider>,
 )

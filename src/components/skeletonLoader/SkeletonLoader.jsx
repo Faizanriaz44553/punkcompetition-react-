@@ -1,17 +1,17 @@
-import React from "react";
 import Skeleton from "@mui/material/Skeleton";
-import Box from "@mui/material/Box";
 
-const SkeletonLoader = ({ lines = 3, width = "100%", height = 20 }) => {
+const SkeletonLoader = ({ lines, width, height }) => {
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
-      {Array.from({ length: lines }).map((_, index) => (
-        <Skeleton key={index} variant="rectangular" width={width} height={height} />
-      ))}
-    </Box>
+    <div className="w-full flex flex-wrap justify-center items-center gap-4">  {/* flex-col laga diya */}
+      {
+        [...Array(lines)].map((_, index) => (
+          <div key={index}>
+            <Skeleton variant="rectangular" width={width} height={height} className="rounded-lg" />
+          </div>
+        ))
+      }
+    </div>
   );
 };
 
 export default SkeletonLoader;
-
-

@@ -25,6 +25,7 @@ const HowWork = () => {
               <Card
                 sx={{
                   backgroundColor: "#343a40",
+                  height: "400px",
                   color: "#f8f9fa",
                   textAlign: "center",
                   p: { xs: 2, md: 3 }, // Adjust padding based on screen size
@@ -37,16 +38,16 @@ const HowWork = () => {
                 }}
               >
                 <CardContent>
-                  <CheckCircleIcon sx={{ fontSize: { xs: 30, md: 40 }, color: "#ffc107" }} />
+                  <CheckCircleIcon sx={{ fontSize: { xs: 40, md: 40 }, color: "#ffc107" }} />
                   <Typography 
                     variant="h6" 
-                    sx={{ fontWeight: "bold", mt: 2, fontSize: { xs: "1rem", md: "1.25rem" } }}
+                    sx={{ fontWeight: "bold", mt: 2, fontSize: { xs: "1.3rem", md: "1.2rem" } }}
                   >
                     {step.title}
                   </Typography>
                   <Typography 
                     variant="body2" 
-                    sx={{ mt: 2, color: "#adb5bd", fontSize: { xs: "0.85rem", md: "1rem" } }}
+                    sx={{ mt: 2, color: "#adb5bd", fontSize: { xs: "1rem", md: "1rem" } }}
                   >
                     {step.description}
                   </Typography>

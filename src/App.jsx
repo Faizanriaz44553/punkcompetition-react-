@@ -12,6 +12,9 @@ const App = () => {
   return (
     <div>
       {!hideNavbarFooter ? <Navbar /> : null} 
+      <div style={{width: "100%" , height: "55px" }}>
+
+      </div>
       
       <Routes>
         {RoutesJson.map(({ path, element }, index) => (

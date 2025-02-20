@@ -1,6 +1,8 @@
 import React from 'react'
 import Carousel from '../../components/carousol/Carousel'
 import HowWork from '../../components/how-to-work/HowWork'
+import LiveCompetition from '../../components/liveCompetition/LiveCompetition'
+
 // import { useSelector } from 'react-redux';
 
 const Home = () => {
@@ -12,7 +14,7 @@ const Home = () => {
      <Carousel/>
      <div>
      <HowWork/>
-
+     <LiveCompetition/>
      </div>
     </div>
   )

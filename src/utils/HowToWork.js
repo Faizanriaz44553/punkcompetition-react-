@@ -1,29 +1,28 @@
 const HowToWork = [
-    {
-      step: 1,
-      title: "Competition Choose Karein Aur Sawal Ka Jawab Dein",
-      description: 
-        "Sab se pehle, latest competitions ka section dekhein aur jo pasand aaye usay select karein. " + 
-        "Har competition ke sath ek sawal diya jata hai. Ye ek simple sawal hota hai jo competition me hissa lene ke liye zaroori hai. " + 
-        "Agar aap ka jawab sahi hota hai to aap next step par ja sakte hain, agar ghalat hota hai to aapko dobara koshish ka mauka milega."
-    },
-    {
-      step: 2,
-      title: "Signup Ya Login Karein Aur Apna Ticket Select Karein",
-      description: 
-        "Agar jawab sahi diya hai to aapko signup ya login karna hoga, taki aap competition me properly register ho sakein. " + 
-        "Login hone ke baad, aap apni marzi ka ticket select kar sakte hain. Apni lucky number ko bhi choose kar sakte hain taki jeetne ka chance barh sake. " +
-        "Ticket select karne ke baad, payment karein taki aapka entry confirm ho sake."
-    },
-    {
-      step: 3,
-      title: "Competition Me Hissa Lein Aur Winner Announcement Dekhein",
-      description: 
-        "Jab aapka entry complete ho jaye, to aap competition ka hissa ban chuke hain! " + 
-        "Winner ka announcement har din Facebook Live par hota hai, jisme competition ke winners ka naam announce kiya jata hai. " +
-        "Agar aap jeet gaye to aapko competition ke tahat diya gaya inaam milay ga."
-    }
-  ];
-  
-  export default HowToWork;
-  
+  {
+    step: 1,
+    title: "Choose a Competition and Answer the Question",
+    description: 
+      "First, browse the latest competitions and select the one you like. " + 
+      "Each competition comes with a question that must be answered to participate. " + 
+      "If your answer is correct, you can proceed to the next step. If incorrect, you will have another chance to try again."
+  },
+  {
+    step: 2,
+    title: "Sign Up or Log In and Select Your Ticket",
+    description: 
+      "Once you have answered correctly, you will need to sign up or log in to register for the competition. " + 
+      "After logging in, you can select your preferred ticket and even choose a lucky number to increase your chances of winning. " +
+      "Once you have selected your ticket, proceed with the payment to confirm your entry."
+  },
+  {
+    step: 3,
+    title: "Take Part in the Competition and Watch the Winner Announcement",
+    description: 
+      "Once your entry is complete, you are officially part of the competition! " + 
+      "The winner announcement takes place daily via Facebook Live, where the names of the winners are revealed. " +
+      "If you win, you will receive the prize as per the competition rules."
+  }
+];
+
+export default HowToWork;
